@@ -11,11 +11,24 @@ def cargarCliente(tipo):
             print("El formato introducido no es correcto")
             continue
 
-        if tipo == "movimientos":
-            return leerFichero(num)
+        try:
+            if tipo == "movimientos":
+                cliente = leerFichero(num)
+            elif tipo == "guardado":
+                cliente = cargarClienteGuardado(num)
+            else:
+                cliente = None
 
-        elif tipo == "guardado":
-            return cargarClienteGuardado(num)
+            if cliente is None:
+                print("No se ha podido procesar el cliente solicitado.")
+                return None
+
+            return cliente
+
+        except Exception as e:
+            log.escribir("ERROR", f"Intento de consulta de cliente inexistente")
+            print("Ocurrió un error al cargar el cliente.")
+            return None
 
 
 def leerFichero(numCliente):
@@ -52,12 +65,14 @@ def leerFichero(numCliente):
         # Guardamos el estado final del cliente
         cliente.guardar()
 
+
         print("Datos del cliente cargados correctamente")
 
         return cliente
 
     except FileNotFoundError:
         print("El usuario no tiene ninguna cuenta con el banco")
+        log.escribir("ERROR", f"Error en la consulta del cliente : {numCliente}")
         return None
 
 
@@ -78,4 +93,5 @@ def cargarClienteGuardado(numCliente):
 
     except FileNotFoundError:
         print("Primero tienes que cargar los datos de este cliente")
+        log.escribir("ERROR", f"Intento de consulta de cliente inexistente : {numCliente}")
         return None
