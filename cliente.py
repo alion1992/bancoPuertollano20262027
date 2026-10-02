@@ -38,15 +38,17 @@ def leerFichero(numCliente):
 
                 if destino == "Cuenta" and operacion == "Ingreso":
                     cliente.cuenta.ingresar(cantidad)
-
+                    log.escribir("INFO", f"Procesado: Operacion={operacion}, Destino={destino}, Cantidad={cantidad}")
                 elif destino == "Cuenta" and operacion == "Retirada":
                     cliente.cuenta.retirar(cantidad)
-
+                    log.escribir("INFO", f"Procesado: Operacion={operacion}, Destino={destino}, Cantidad={cantidad}")
                 elif destino == "Deposito" and operacion == "Ingreso":
                     cliente.deposito.ingresar(cantidad)
-
+                    log.escribir("INFO", f"Procesado: Operacion={operacion}, Destino={destino}, Cantidad={cantidad}")
                 elif destino == "Deposito" and operacion == "Retirada":
                     cliente.deposito.retirar(cantidad)
+                else:
+                    log.escribir("WARNING", f"Movimiento no reconocido: Operacion={operacion}, Destino={destino}")
 
                 linea = f.readline()
 
