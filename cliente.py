@@ -23,6 +23,7 @@ def leerFichero(numCliente):
     cliente = Cliente(numCliente)
 
     try:
+        log.escribir("INFO", f"Iniciando carga de cliente {numCliente}")
         with open(f"ficherosClientes/{numCliente}.txt", "r") as f:
 
             linea = f.readline()
@@ -51,13 +52,14 @@ def leerFichero(numCliente):
 
         # Guardamos el estado final del cliente
         cliente.guardar()
-
+        log.escribir("INFO", f"Carga de cliente {numCliente} finalizada correctamente")
         print("Datos del cliente cargados correctamente")
 
         return cliente
 
     except FileNotFoundError:
         print("El usuario no tiene ninguna cuenta con el banco")
+        log.escribir("ERROR", f"Fichero de movimientos no ha sido encontrado para el cliente: {numCliente}")
         return None
 
 
@@ -78,4 +80,5 @@ def cargarClienteGuardado(numCliente):
 
     except FileNotFoundError:
         print("Primero tienes que cargar los datos de este cliente")
+        log.escribir("INFO", f"Numero cliente introducido: {numCliente}");
         return None

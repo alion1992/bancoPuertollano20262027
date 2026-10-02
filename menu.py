@@ -24,7 +24,7 @@ def menu():
                 print(f"Saldo cuenta: {cliente.cuenta.saldo} €")
                 print(f"Saldo depósito: {cliente.deposito.saldo} €")
             else:
-                log.escribir("ERROR", f"NO HAY NINGUN CLIENTE CON ESE NUMERO")
+                log.escribir("ERROR", f"NO HAY NINGUN CLIENTE CARGADO CON EL NUMERO INTRODUCIDO")
 
         elif opt == "3":
             log.escribir(
