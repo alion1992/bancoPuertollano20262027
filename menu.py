@@ -14,7 +14,11 @@ def menu():
         opt = input("Introduce la opción deseada: ")
 
         if opt == "1":
-            cargarCliente("movimientos")
+            cliente = cargarCliente("movimientos")
+            if cliente is not None:
+                print(f"Cliente: {cliente.numero}")
+                print(f"Saldo cuenta: {cliente.cuenta.saldo} €")
+                print(f"Saldo deposito: {cliente.deposito.saldo} €")
 
         elif opt == "2":
             cliente = cargarCliente("guardado")
