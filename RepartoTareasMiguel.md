@@ -10,7 +10,6 @@ Las tareas se repartirán entre los dos miembros de la pareja. Cada alumno será
 ```text
 bugfix/01-cliente-inexistente
 ```
-
 Al consultar un cliente que no se ha cargado previamente, el programa puede intentar acceder a sus datos aunque el cliente sea `None`.
 
 Corregir el problema para que:
