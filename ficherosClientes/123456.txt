@@ -1,0 +1,4 @@
+500;Transferencia;Cuenta
+100;Ingreso;Tarjeta
+150;Ingreso;Deposito
+200;Retirada;Cuenta
