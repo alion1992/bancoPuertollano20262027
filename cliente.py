@@ -31,7 +31,13 @@ def leerFichero(numCliente):
 
                 datos = linea.strip().split(";")
 
-                cantidad = float(datos[0])
+                try:
+                    cantidad = float(datos[0])
+                except ValueError:
+                    log.escribir("ERROR", f"Cantidad incorrecta en la línea: {linea.strip()}")
+                    linea = f.readline()
+                    continue
+
                 operacion = datos[1]
                 destino = datos[2]
 
