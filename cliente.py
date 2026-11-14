@@ -20,6 +20,8 @@ def cargarCliente(tipo):
 
 def leerFichero(numCliente):
 
+    # Registro el inicio de la carga antes de abrir el fichero
+    log.escribir("INFO", f"Inicio de la carga del cliente {numCliente}")
     cliente = Cliente(numCliente)
 
     try:
@@ -58,13 +60,27 @@ def leerFichero(numCliente):
         # Guardamos el estado final del cliente
         cliente.guardar()
 
+        # Confirmo en el log que el fichero se ha procesado sin problemas
+        log.escribir("INFO", f"Cliente {numCliente} cargado correctamente")
         print("Datos del cliente cargados correctamente")
+
+
+
+       
+        # Muestro el resumen final sacando los datos directamente desde los getters de Cliente
+        print(f"Cliente: {cliente.getNumero()}")
+        print(f"Saldo cuenta: {cliente.getCuenta().getSaldo()} €")
+        print(f"Saldo depósito: {cliente.getDeposito().getSaldo()} €")
+
 
         return cliente
 
     except FileNotFoundError:
+        # Si no existe el archivo del cliente, dejo constancia como ERROR
+        log.escribir("ERROR", f"Fichero de movimientos inexistente para el cliente {numCliente}")
         print("El usuario no tiene ninguna cuenta con el banco")
         return None
+
 
 
 def cargarClienteGuardado(numCliente):
