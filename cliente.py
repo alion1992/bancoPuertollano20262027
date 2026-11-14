@@ -55,6 +55,9 @@ def leerFichero(numCliente):
                 elif destino == "Deposito" and operacion == "Retirada":
                     cliente.deposito.retirar(cantidad)
 
+                else:
+                    log.escribir("WARNING", f"Operación o destino desconocido en la línea: {linea.strip()}")
+
                 linea = f.readline()
 
         # Guardamos el estado final del cliente
@@ -64,14 +67,10 @@ def leerFichero(numCliente):
         log.escribir("INFO", f"Cliente {numCliente} cargado correctamente")
         print("Datos del cliente cargados correctamente")
 
-
-
-       
         # Muestro el resumen final sacando los datos directamente desde los getters de Cliente
         print(f"Cliente: {cliente.getNumero()}")
         print(f"Saldo cuenta: {cliente.getCuenta().getSaldo()} €")
         print(f"Saldo depósito: {cliente.getDeposito().getSaldo()} €")
-
 
         return cliente
 
@@ -80,7 +79,6 @@ def leerFichero(numCliente):
         log.escribir("ERROR", f"Fichero de movimientos inexistente para el cliente {numCliente}")
         print("El usuario no tiene ninguna cuenta con el banco")
         return None
-
 
 
 def cargarClienteGuardado(numCliente):
