@@ -58,6 +58,15 @@ def leerFichero(numCliente):
         log.escribir("INFO", f"Cliente {numCliente} cargado correctamente")
         print("Datos del cliente cargados correctamente")
 
+
+
+       
+        # Muestro el resumen final sacando los datos directamente desde los getters de Cliente
+        print(f"Cliente: {cliente.getNumero()}")
+        print(f"Saldo cuenta: {cliente.getCuenta().getSaldo()} €")
+        print(f"Saldo depósito: {cliente.getDeposito().getSaldo()} €")
+
+
         return cliente
 
     except FileNotFoundError:
@@ -65,6 +74,8 @@ def leerFichero(numCliente):
         log.escribir("ERROR", f"Fichero de movimientos inexistente para el cliente {numCliente}")
         print("El usuario no tiene ninguna cuenta con el banco")
         return None
+
+
 
 def cargarClienteGuardado(numCliente):
 
