@@ -13,6 +13,12 @@ class Log:
 
     def escribir(self, tipo, mensaje):
         fecha_hora = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        tipos_validos = ["INFO", "WARNING", "ERROR"]
 
-        with open(self.ruta, "a") as fichero:
-            fichero.write(f"[{fecha_hora}] [{tipo.upper()}] {mensaje}\n")
+        # Normalizo el tipo a mayúsculas y, si no está permitido, lo dejo en INFO por defecto
+        tipo_normalizado = str(tipo).upper() if tipo is not None else "INFO"
+        if tipo_normalizado not in tipos_validos:
+            tipo_normalizado = "INFO"
+
+        with open(self.ruta, "a", encoding="utf-8") as fichero:
+            fichero.write(f"[{fecha_hora}] [{tipo_normalizado}] {mensaje}\n")
