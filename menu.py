@@ -16,15 +16,31 @@ def menu():
         if opt == "1":
             cargarCliente("movimientos")
 
+
         elif opt == "2":
+
             cliente = cargarCliente("guardado")
-            log.escribir("INFO", f"CONSULTA DATOS CLIENTE CON NÚMERO: {cliente.numero}")
+
+            # Compruebo primero si el cliente existe para evitar el fallo al leer cliente.numero
+
             if cliente is not None:
+
+                log.escribir("INFO", f"CONSULTA DATOS CLIENTE CON NÚMERO: {cliente.numero}")
+
                 print(f"Cliente: {cliente.numero}")
+
                 print(f"Saldo cuenta: {cliente.cuenta.saldo} €")
+
                 print(f"Saldo depósito: {cliente.deposito.saldo} €")
                 print(f"Saldo total: {cliente.getSaldoTotal()} €")
 
+            else:
+
+                # Si devuelve None, registro el error en el log y aviso por pantalla
+
+                log.escribir("ERROR", "Intento de consulta de un cliente no cargado o inexistente")
+
+                print("Error: No se puede consultar porque el cliente no existe o no ha sido cargado previamente.")
         elif opt == "3":
             log.escribir(
                 "INFO",
