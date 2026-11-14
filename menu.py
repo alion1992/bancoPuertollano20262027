@@ -1,5 +1,6 @@
 from cliente import cargarCliente
 from logs import Log
+from  pathlib import Path
 
 log = Log()
 
@@ -9,7 +10,8 @@ def menu():
 
         print("1) Cargar Datos Cliente")
         print("2) Consultar cuenta Deposito")
-        print("3) Salir")
+        print("3) Listar clientes cargados")
+        print("4) Salir")
 
         opt = input("Introduce la opción deseada: ")
 
@@ -26,6 +28,19 @@ def menu():
                 print(f"Saldo total: {cliente.getSaldoTotal()} €")
 
         elif opt == "3":
+            carpeta = Path("datosClientes")
+            if not carpeta.exists():
+                print("No existe la carpeta datosClientes.")
+            elif not any(carpeta.iterdir()):
+                print("No hay clientes cargados todavía.")
+            else:
+                print("Clientes cargados:\n")
+
+                for archivo in carpeta.iterdir():
+                    if archivo.suffix == ".txt":
+                        print("- " + archivo.stem)
+
+        elif opt == "4":
             log.escribir(
                 "INFO",
                 "FIN EJECUCIÓN"
